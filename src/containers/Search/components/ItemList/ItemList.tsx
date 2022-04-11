@@ -22,9 +22,15 @@ const getSortedItemsBy: Record<SortOption, (items: Libraries) => Libraries> = {
 interface ResultListProps {
   items: Libraries;
   loading: boolean;
+  onSortChange: (value: SortOption) => void;
   error?: string;
 }
-const ItemList = ({ items, loading, error = "" }: ResultListProps) => {
+const ItemList = ({
+  items,
+  loading,
+  error = "",
+  onSortChange,
+}: ResultListProps) => {
   const [sortedItems, setSortedItems] = useState<Libraries>([]);
   const [visibleItems, setVisibleItems] = useState<Libraries>([]);
   const [activePage, setActivePage] = useState(1);
@@ -42,6 +48,10 @@ const ItemList = ({ items, loading, error = "" }: ResultListProps) => {
       setVisibleItems(sortedItems.slice(0, maxVisibleItems));
     }
   }, [sortedItems]);
+
+  useEffect(() => {
+    onSortChange(sortBy);
+  }, [sortBy, onSortChange]);
 
   const ListPagination = useCallback(
     () => (

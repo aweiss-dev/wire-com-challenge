@@ -20,6 +20,7 @@ const Search = () => {
   const [queryResults, setQueryResults] = useState<Libraries>([]);
   const [loading, setLoading] = useState(true);
   const [errorText, setErrorText] = useState("");
+  const [sortByStars, setSortByStars] = useState(false);
 
   useEffect(() => {
     setErrorText("");
@@ -27,7 +28,7 @@ const Search = () => {
     setLoading(true);
     const timeOutId = setTimeout(
       () =>
-        fetchLibraries(inputValue)
+        fetchLibraries({ name: inputValue, sortByStars })
           .then(({ data }) => {
             setQueryResults(data.libraries ? data.libraries : []);
           })
@@ -40,7 +41,7 @@ const Search = () => {
       500
     );
     return () => clearTimeout(timeOutId);
-  }, [inputValue]);
+  }, [inputValue, sortByStars]);
 
   return (
     <MainWrapper role="search">
@@ -49,7 +50,16 @@ const Search = () => {
         onValueChange={(value) => setInputValue(value)}
         errorText={""}
       />
-      <ItemList items={queryResults} loading={loading} error={errorText} />
+      <ItemList
+        items={queryResults}
+        loading={loading}
+        error={errorText}
+        onSortChange={(sortByStars) =>
+          setSortByStars(
+            sortByStars === "STARS_ASC" || sortByStars === "STARS_DESC"
+          )
+        }
+      />
     </MainWrapper>
   );
 };

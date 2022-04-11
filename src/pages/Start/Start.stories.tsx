@@ -12,7 +12,7 @@ export default {
   parameters: {
     msw: {
       handlers: [
-        rest.get(`${uri}${getEndpoint("")}`, (req, res, ctx) => {
+        rest.get(`${uri}${getEndpoint({ name: "" })}`, (req, res, ctx) => {
           return res(ctx.json(MockedListData));
         }),
       ],

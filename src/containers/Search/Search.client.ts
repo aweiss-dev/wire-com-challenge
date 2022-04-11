@@ -5,10 +5,6 @@ import { Library } from "./Search.types";
 
 const uri = "https://libraries.io/api/";
 const endpoint = "bower-search";
-const getEndpoint = (searchString: string | undefined) =>
-  searchString && !!searchString.length
-    ? `${endpoint}?q=${searchString}`
-    : endpoint;
 
 const restLink = new RestLink({ uri });
 const client = new ApolloClient({
@@ -18,8 +14,11 @@ const client = new ApolloClient({
 
 const GET_LIBRARIES = gql`
   query getLibrabries {
-    libraries(libName: $libName, pathBuilder: $pathBuilder)
-      @rest(type: "Library", pathBuilder: $pathBuilder) {
+    libraries(
+      name: $name
+      sortByStars: $sortByStars
+      pathBuilder: $pathBuilder
+    ) @rest(type: "Library", pathBuilder: $pathBuilder) {
       name
       description
       homepage
@@ -29,20 +28,38 @@ const GET_LIBRARIES = gql`
   }
 `;
 
+const getEndpoint = ({ name, sortByStars }: fetchLibrariesProps) => {
+  if (name && !!name.length) {
+    return `${endpoint}?q=${name}${sortByStars ? "&sort=stars" : ""}`;
+  }
+
+  if (sortByStars) {
+    return `${endpoint}?sort=stars`;
+  }
+
+  return endpoint;
+};
+
 export type QueryVariables = {
-  libName: string;
+  name: string;
+  sortByStars?: boolean;
   pathBuilder: ({ args }: { args: QueryVariables }) => string;
 };
 export type QueryResult = {
   libraries: Library[];
 };
 
-const fetchLibraries = (value: string) =>
+interface fetchLibrariesProps {
+  name: string;
+  sortByStars?: boolean;
+}
+const fetchLibraries = ({ name, sortByStars = false }: fetchLibrariesProps) =>
   client.query<QueryResult, QueryVariables>({
     query: GET_LIBRARIES,
     variables: {
-      libName: value,
-      pathBuilder: ({ args }) => getEndpoint(args.libName),
+      sortByStars,
+      name,
+      pathBuilder: ({ args }) => getEndpoint(args),
     },
   });
 
