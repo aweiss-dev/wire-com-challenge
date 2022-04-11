@@ -64,7 +64,10 @@ describe("Container/Search", () => {
     const searchParam = "typescript";
     userEvent.type(screen.getByRole("searchbox"), searchParam);
     await waitFor(() =>
-      expect(mockClient.fetchLibraries).toHaveBeenLastCalledWith(searchParam)
+      expect(mockClient.fetchLibraries).toHaveBeenLastCalledWith({
+        name: searchParam,
+        sortByStars: false,
+      })
     );
   });
 });

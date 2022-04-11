@@ -16,20 +16,24 @@ export const Basic = Template.bind({});
 Basic.args = {
   items: MockedListData,
   loading: false,
+  onSortChange: () => null,
 };
 export const Loading = Template.bind({});
 Loading.args = {
   items: [],
   loading: true,
+  onSortChange: () => null,
 };
 export const Error = Template.bind({});
 Error.args = {
   items: [],
   loading: false,
   error: "Hi, I am an Error Message",
+  onSortChange: () => null,
 };
 export const EmptyResults = Template.bind({});
 EmptyResults.args = {
   items: [],
   loading: false,
+  onSortChange: () => null,
 };

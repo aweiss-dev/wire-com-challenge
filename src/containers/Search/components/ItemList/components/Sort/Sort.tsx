@@ -17,12 +17,14 @@ const ListSortWrapper = styled(ToggleButtonGroup)(
 );
 
 export type SortOption =
+  | "UNSORTED"
   | "ALPHABET_DESC"
   | "ALPHABET_ASC"
   | "STARS_DESC"
   | "STARS_ASC";
 
 const sortItemsContent: Record<SortOption, ReactNode> = {
+  UNSORTED: <>Unsorted</>,
   ALPHABET_ASC: (
     <>
       <AlphabetIcon /> <AscIcon />

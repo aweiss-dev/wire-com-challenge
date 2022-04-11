@@ -10,6 +10,7 @@ import { ErrorWrapper, MainWrapper, ListWrapper } from "./ItemList.styles";
 
 const maxVisibleItems = 5;
 const getSortedItemsBy: Record<SortOption, (items: Libraries) => Libraries> = {
+  UNSORTED: (items) => items,
   ALPHABET_ASC: (items) =>
     items.sort((a, b) =>
       a.name.toLowerCase().localeCompare(b.name.toLowerCase())
@@ -34,7 +35,7 @@ const ItemList = ({
   const [sortedItems, setSortedItems] = useState<Libraries>([]);
   const [visibleItems, setVisibleItems] = useState<Libraries>([]);
   const [activePage, setActivePage] = useState(1);
-  const [sortBy, setSortBy] = useState<SortOption>("ALPHABET_ASC");
+  const [sortBy, setSortBy] = useState<SortOption>("UNSORTED");
 
   useEffect(() => {
     if (items.length) {

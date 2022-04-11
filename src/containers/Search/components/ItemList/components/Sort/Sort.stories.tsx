@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Sort> = (args) => <Sort {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  activeValue: "STARS_ASC",
+  activeValue: "UNSORTED",
 };
 
 export const Interactive = Template.bind({});

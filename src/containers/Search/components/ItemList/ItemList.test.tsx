@@ -60,7 +60,7 @@ describe("Container/Search/Components/ResultList", () => {
       screen.getAllByRole("listitem", {
         name: "search result item",
       })[0]
-    ).toHaveTextContent("angular-ui-router");
+    ).toHaveTextContent("bootstrap");
 
     userEvent.click(
       screen.getByRole("button", { name: "Sort by alphabet desc" })
@@ -99,7 +99,7 @@ describe("Container/Search/Components/ResultList", () => {
       screen.getAllByRole("listitem", {
         name: "search result item",
       })[0]
-    ).toHaveTextContent("angular-ui-router");
+    ).toHaveTextContent("bootstrap");
 
     userEvent.click(
       screen.getAllByRole("button", {
@@ -112,7 +112,7 @@ describe("Container/Search/Components/ResultList", () => {
       screen.getAllByRole("listitem", {
         name: "search result item",
       })[0]
-    ).toHaveTextContent("chartjs");
+    ).toHaveTextContent("ionic");
 
     userEvent.click(
       screen.getAllByRole("button", {
@@ -125,7 +125,7 @@ describe("Container/Search/Components/ResultList", () => {
       screen.getAllByRole("listitem", {
         name: "search result item",
       })[0]
-    ).toHaveTextContent("angular-ui-router");
+    ).toHaveTextContent("bootstrap");
 
     userEvent.click(
       screen.getAllByRole("button", {
@@ -138,6 +138,6 @@ describe("Container/Search/Components/ResultList", () => {
       screen.getAllByRole("listitem", {
         name: "search result item",
       })[0]
-    ).toHaveTextContent("normalize.css");
+    ).toHaveTextContent("select2");
   });
 });
