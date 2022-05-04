@@ -34,7 +34,6 @@ module.exports = {
     ],
   ],
   testEnvironment: "jsdom",
-  transformIgnorePatterns: ["node_modules/(?!(@congstar/.*)/)"],
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/style.mock.js",
     "\\.(gif|ttf|eot|svg|woff|woff2)$": "<rootDir>/__mocks__/file.mock.js",
